@@ -16,13 +16,16 @@
   <link href="./css/bootstrap.min.css" rel="stylesheet">
   <link href="./css/neuralvideo.css" rel="stylesheet">
   <link href="./css/pricing.css" rel="stylesheet">
-
+  <!-- jquery load -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- require packages . (seems to have some issues loading the "file-system") -->
   <script type="text/javascript" src="./js/require.js"></script>
+  <!-- break frames and do animations -->
   <script type="text/javascript" src="./js/neuralvideo.js"></script>
-  <script type="text/javascript" src = "./js/animation.js"></script>
-
-
+  <script type="text/javascript" src="./js/animation.js"></script>
+  <!-- tensorflow.js load -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> </script>
+  <script type="text/javascript" src="./deepdream.js"></script>
 </head>
 
 <body>
@@ -187,7 +190,7 @@
             }
           }
         }
-        function stop(){
+        function stop() {
           var elem = document.getElementById("progress");
           elem.style.display = "none";
         }
@@ -213,9 +216,9 @@
       </h3>
       <p class="lead">right click to download you video</p>
       <p style="margin-top: 30pt;">
-          <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="startAnimating()">start animate frames</a>
-        </p>
-      <div id = "myimage"></div>
+        <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="startAnimating()">start animate frames</a>
+      </p>
+      <div id="myimage"></div>
 
 
 
