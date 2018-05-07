@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Last update : 180506 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- information -->
+  <meta name="description" content="MIT_1001/Team Ollida">
+  <meta name="author" content="Sen_Dai and Jaclyn_Berry">
+  <!-- tabs look -->
+  <link rel="icon" href="./imgs/favicon.png">
+  <title>Neural Video</title>
+  <!-- css part -->
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css/neuralvideo.css" rel="stylesheet">
+  <link href="./css/pricing.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/require.js"></script>
+  <script type="text/javascript" src="./js/neuralvideo.js"></script>
+  <script type="text/javascript" src = "./js/animation.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container marketing">
+
+    <!-- Title -->
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4" style="font-size: 60px;font-weight: 800;color: var(--blue);">NEURAL VIDEO</h1>
+      <p class="lead">Create a Deepdream style video from your own.</p>
+      <p style="font-size: 14px;font-weight: 300;color: grey;">A little demo of MIT 1001 Class by sendai and jaclynberry. Implement with Javascript</p>
+    </div>
+
+    <!-- little process description -->
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        <!-- step 1 -->
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">STEP 1</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              <small class="text-muted">
+                <p style="color:mediumvioletred;">upload video</p>
+              </small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>better if shorter than 10s</li>
+              <li>better if smaller than 480P</li>
+              <li>default 15fps</li>
+              <br>
+              <li>
+                <p style="font-size: 14px;font-weight: 300;color: grey;">Videos will be break down into frames and store in web-folder using FFMPEGJS</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- step 2 -->
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">STEP 2</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              <small class="text-muted">
+                <p style="color:mediumvioletred;">make dreams</p>
+              </small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>be patient for the long run</li>
+              <li>progress will be shown no worry</li>
+              <li>no need to install packages</li>
+              <br>
+              <li>
+                <p style="font-size: 14px;font-weight: 300;color: grey;">frames will be insert into Google Inception_v3 model to make deepdream pictures using TENSORFLOWJS</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- step 3 -->
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">STEP 3</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              <small class="text-muted">
+                <p style="color:mediumvioletred;">get videos</p>
+              </small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>you can download "deepdreamed" video </li>
+              <li>have fun !</li>
+              <br>
+              <li>
+                <p style="font-size: 14px;font-weight: 300;color: grey;">The deepdream frames will be merged into an output video using FFMPEGJS</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- step by step -->
+    <!-- divider -->
+    <hr class="featurette-divider">
+    <!-- step 1 -->
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h3 class="display-4">Step 1
+        <span class="text-muted"> - Upload your video</span>
+      </h3>
+      <p class="lead">selct a video from your local folder</p>
+
+      <!-- choose a video file and play it -->
+      <script>
+        //get link from input
+        function readURL(input) {
+          console.log(input);
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              console.log(document.getElementById('videoinput').value)
+              var video = document.createElement("video");
+              $('video')
+                .attr('src', e.target.result)
+                .width(480)
+                .height(360);
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+
+        function showalert() {
+          setTimeout(function () { alert("video frames successfully created !"); }, 1000);
+        }
+      </script>
+
+      <p style="margin-left: 100pt;">
+        <input type="file" class="text-center" accept="video/*" id="videoinput" onchange="readURL(this);" />
+      </p>
+      <video id="video" controls></video>
+      <p style="margin-top: 30pt;">
+        <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="showalert()">start export frames</a>
+      </p>
+    </div>
+
+    <!-- divider -->
+    <hr class="featurette-divider">
+    <!-- step 2 -->
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h3 class="display-4">Step 2
+        <span class="text-muted"> - Make dreams</span>
+      </h3>
+      <p class="lead">there are a bunch of layers in the Inception_v3 networks, but only few of them can create good output. Please select
+        one from the dropdown menu.</p>
+
+      <select name="endLayer">
+        <option selected="selected">inception_3a</option>
+        <option>inception_3b</option>
+        <option>inception_4a</option>
+        <option>inception_4b</option>
+        <option>inception_4c</option>
+        <option>inception_4d</option>
+        <option>inception_4e</option>
+        <option>inception_5a</option>
+        <option>inception_5b</option>
+      </select>
+      <script>
+        function move() {
+          var elem = document.getElementById("progress");
+          elem.style.display = "block"
+          var width = 1;
+          var id = setInterval(frame, 1000);
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+            } else {
+              width++;
+              elem.style.width = width + '%';
+            }
+          }
+        }
+        function stop(){
+          var elem = document.getElementById("progress");
+          elem.style.display = "none";
+        }
+      </script>
+      <p style="margin-top: 30pt;">
+        <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="move()">start stylize frames</a>
+        <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="stop()">stop</a>
+      </p>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" id="progress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+          <span class="sr-only">0%</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- divider -->
+    <hr class="featurette-divider">
+    <!-- step 3 -->
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h3 class="display-4">Step 3
+        <span class="text-muted"> - Your videos here</span>
+      </h3>
+      <p class="lead">right click to download you video</p>
+      <p style="margin-top: 30pt;">
+          <a class="btn btn-lg btn-primary" role="button" style="color:white;" onclick="startAnimating()">start animate frames</a>
+        </p>
+      <div id = "myimage"></div>
+
+
+
+    </div>
+
+    <hr class="featurette-divider">
+
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="text-center" style="font-size: 14px;font-weight: 300;color: grey;">Little demo of Team Ollida from 1001 class </p>
+    </footer>
+  </div>
+  <!-- /.container -->
+
+
+  <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="./js/bootstrap.min.js"></script>
+</body>
+
+</html>
